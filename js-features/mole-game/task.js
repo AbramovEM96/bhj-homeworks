@@ -1,32 +1,34 @@
-const moleDead = document.getElementById('dead');
-const moleSave = document.getElementById('lost');
+const dead = document.getElementById('dead');
+const lost = document.getElementById('lost');
+let getHole = index => document.getElementById(`hole${index}`)
 
+function IsWin() {
+	dead.textContent = 0;
+	lost.textContent = 0;
+	alert('Вы победили!');
+	stop()
+}
 
-function check() {
-    if (moleSave.textContent == 5) {
-     alert('Проиграли, попробуйте снова!')
-     restart();
-    } else if (moleDead.textContent == 10) {
-     alert('Победили, поздравляю!')
-     restart();
- }
-};
+function IsLost() {
+	dead.textContent = 0;
+	lost.textContent = 0;
+	alert('Вы проиграли!');
+	stop()
+}
+
 
 for (let i = 1; i < 10; i++) {
-    let holeGet = document.getElementById('hole${i}');
-    holeGet.onclick = function() {
-    let searchHole = hole.className.includes('hole_has-mole');
-       if (searchHole === true){
-        moleDead.textContent = parseInt(moleDead.textContent) + 1;
-       } else {
-        moleSave.textContent = parseInt(moleSave.textContent) + 1;
-       }
-    }
-};
+	getHole(i).onclick = () => {
+		if (getHole(i).className === 'hole hole_has-mole') {
+			dead.textContent++;
+		} else {
+			lost.textContent++;
+		}
 
-
-
-function restart() {
-    moleDead.textContent = 0;
-    moleSave.textContent = 0;
-};
+		if (dead.textContent == 10) {
+			IsWin();
+		} else if (lost.textContent == 5) {
+			IsLost();
+		}
+	}
+}

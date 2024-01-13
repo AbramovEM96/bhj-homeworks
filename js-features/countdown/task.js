@@ -1,11 +1,30 @@
+const timer = document.getElementById('timer');
+const time = new Date();
 
-const timerId = document.getElementById("timer");
-const countTimer  = function(){
-    if (timerId.textContent >= 1){
-        timerId.textContent -= 1;
-    }	else if(timerId.textContent = 0){
-        alert("Вы победили в конкурсе!");
-    }
+let hours = 0;
+let minutes = 0;
+let seconds = 20;
+
+function Timer() {
+	time.setHours(hours);
+	time.setMinutes(minutes);
+	time.setSeconds(seconds);
+
+	timer.textContent = time.toLocaleTimeString('ru-Ru', {
+		hour: '2-digit',
+		minute: '2-digit',
+		second: '2-digit'
+	});
 }
 
-setInterval(countTimer,1000);
+Timer();
+
+setInterval(() => {
+	seconds--;
+
+	if (hours === 0 && minutes === 0 && seconds === 0) {
+		alert('Вы победили в конкурсе!')
+	}
+
+	Timer();
+}, 1000)
